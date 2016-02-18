@@ -5,6 +5,7 @@ import argparse
 import urllib2
 import csv
 import re
+import decimal
 
 
 def main():
@@ -39,13 +40,21 @@ def yieldData(csvData):
 
 def searchImages(memoryData):
     count = 0
+    count_all = 0
     pattern = '(?i)(png|jpg|gif)$'
     for row in memoryData:
         image = row[0]
+        count_all += 1
         if re.search(pattern, image) is not None:
             count += 1
-            print image
-    print count
+    percent = decimal.Decimal((
+                                  decimal.Decimal(count)
+                                  / decimal.Decimal(count_all)
+                              ) * decimal.Decimal('10'))
+    message = '{} hits were for images. Out of a total of ' \
+              '{}, this is eual to {}% of all' \
+              ' hits.'.format(count, count_all, percent)
+    print message
 
 
 
