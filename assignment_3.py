@@ -40,7 +40,7 @@ def yieldData(csvData):
         yield line
 
 def searchData(memoryData):
-    """ processes data for images and browser""
+    """ processes data for images and browser"""
     count = 0
     count_all = 0
     pattern = '(?i)(png|jpg|gif)$'
