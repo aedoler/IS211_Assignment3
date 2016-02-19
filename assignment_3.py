@@ -9,11 +9,11 @@ import decimal
 
 
 def main():
+    """Docstring"""
     parser = argparse.ArgumentParser()
     parser.add_argument('--url')
     args = parser.parse_args()
-    print args
-    csvData = downloadData('http://s3.amazonaws.com/cuny-is211-spring2015/weblog.csv') # delete later
+    csvData = downloadData(args.url) # delete later
     memoryData = yieldData(csvData)
     searchData(memoryData)
 
@@ -33,12 +33,14 @@ def downloadData(url):
     return response
 
 def yieldData(csvData):
+    """Stores download csv data as generator object"""
     cr = csv.reader(csvData)
 
     for line in cr:
         yield line
 
 def searchData(memoryData):
+    """ processes data for images and browser""
     count = 0
     count_all = 0
     pattern = '(?i)(png|jpg|gif)$'
